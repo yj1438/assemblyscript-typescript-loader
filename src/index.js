@@ -51,7 +51,7 @@ function createCompatibleModuleInBundle(transpiledJs, transpiledWasm) {
                     ${transpiledJs}
                     compatibleModule = function() {};          compatibleModule.prototype.exports = exports;
                 }
-        resolve(compatibleModule().exports);;
+        resolve(compatibleModule(deps).exports);;
       });
       return p
     }
