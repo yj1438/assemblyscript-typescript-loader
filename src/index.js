@@ -74,14 +74,14 @@ function createCompatibleModuleOutBundle(publicPath) {
 }
 function mkDirsSync(dirname) {
     if (fs.existsSync(dirname)) {
-      return true;
-    } else {
-      if (mkDirsSync(path.dirname(dirname))) {
-        fs.mkdirSync(dirname);
         return true;
-      }
+    } else {
+        if (mkDirsSync(path.dirname(dirname))) {
+            fs.mkdirSync(dirname);
+            return true;
+        }
     }
-  }
+}
 export default function loader(source) {
     var innerCallback = this.async();
     const options = loaderUtils.getOptions(this) || {};
@@ -191,7 +191,10 @@ export default function loader(source) {
                 if (options.emitFile === undefined || options.emitFile) {
                     me.emitFile(outputPath, distFile);
                 }
-                innerCallback(null, createCompatibleModuleOutBundle(publicPath));
+                innerCallback(
+                    null,
+                    createCompatibleModuleOutBundle(publicPath)
+                );
                 return;
             }
         }
